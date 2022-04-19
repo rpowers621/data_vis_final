@@ -1,0 +1,55 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href={{ url_for('static', filename='style.css' ) }} />
+</head>
+
+<body>
+    <button onclick="history.back()">Go Back</button>
+
+    <div class="header-2">
+        <h1>Movie Breakdown for {{start}} - {{end}}</h1>
+    </div>
+
+    <div class="overview">
+        <h2>To create a Blockbuster in <u>{{start}} - {{end}}</u> your movie would need to be a <u>{{genre_1}}</u> with
+            <u>{{genre_2}}</u> and
+            <u>{{genre_3}}</u> tones.
+            It would be <u>{{rating}} </u>and would need to be produced by <u>{{studio}}</u>.
+        </h2>
+    </div>
+    <h2>By Genre</h2>
+
+    <div class="genre">
+
+        <img src={{image_1}} width=400 height=400 />
+        <img src={{image_2}} width=400 height=400 />
+        <img src={{image_3}} width=400 height=400 />
+    </div>
+    <h3>{{genre_1}} &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; {{genre_2}}
+        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; {{genre_3}}
+    </h3>
+
+    <h1>By Movie Rating</h1>
+
+    <div class="ratings">
+        <iframe width="600" height="600" frameborder="0" scrolling="no"
+            src="//plotly.com/~rpowers621/12.embed"></iframe>
+    </div>
+    <h3>{{rating}}</h3>
+
+    <h1>By Studio</h1>
+
+    <div class="studio">
+        <iframe width="900" height="900" frameborder="0" scrolling="no"
+            src="//plotly.com/~rpowers621/14.embed"></iframe>
+    </div>
+    <h3>{{studio}}</h3>
+    <div class="select_button">
+        <form action="/createblock" method="POST">
+            <input type="hidden" id="route" name="route" value="0">
+            <button type="submit" value="Submit">Create Your Own Blockbuster!</button>
+        </form>
+    </div>
+
+</html>

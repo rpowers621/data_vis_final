@@ -1,0 +1,40 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href={{ url_for('static', filename='style.css' ) }} />
+</head>
+
+<body>
+    <div class="header">
+        <p>How to Create a Blockbuster Movie</p>
+    </div>
+    <div class="overview">
+        <p>Based upon the top 10 blockbusters each year from 1975 to 2014, this app will give you the "secret sauce" on
+            how
+            to much a blockbuster movie. So jump in you time machines and great ready to create your blockbuster movie!
+        </p>
+    </div>
+
+
+
+    <div class="select_decade">
+        <p>Please select your criteria to create a blockbuster movie!</p>
+
+        <form action="/results" method="POST">
+            <label for="decade">Select Decade</label>
+            <select name="decade" id="decade">
+                <option value="75-84">1975-1984</option>
+                <option value="85-94">1985-1994</option>
+                <option value="95-04">1995-2004</option>
+                <option value="05-14">2005-2014</option>
+            </select>
+            <br>
+            <input type="submit">
+
+
+        </form>
+    </div>
+
+</body>
+
+</html>

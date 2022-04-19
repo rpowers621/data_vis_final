@@ -1,0 +1,152 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href={{ url_for('static', filename='style.css' ) }} />
+</head>
+
+<body>
+    <button onclick="history.back()">Go Back</button>
+
+    <h1>Create Your Own Movie!</h1>
+    <div class="percents">
+        {% if start %}
+        <p>{{start}} - {{end}}</p>
+        <table>
+
+            <tr>
+                <td>{{g1}}%</td>
+                <td>{{g2}}%</td>
+                <td>{{g3}}%</td>
+                <td>{{rating}}%</td>
+                <td>{{studio}}%</td>
+            </tr>
+            <tr>
+                <td>Genre 1</td>
+                <td>Genre 2</td>
+                <td>Genre 3</td>
+                <td>Rating</td>
+                <td>Studio</td>
+            </tr>
+        </table>
+
+        <p>If you have all percentages 50% and above, then you just created a blockbuster!</p>
+        {% endif %}
+    </div>
+
+
+
+    <div class="select_movie">
+        <form action="/movie_info" method="POST">
+            <label for="decade">Select Decade</label>
+            <select name="decade" id="decade">
+                <option value="75-84">1975-1984</option>
+                <option value="85-94">1985-1994</option>
+                <option value="95-04">1995-2004</option>
+                <option value="05-14">2005-2014</option>
+            </select>
+            <br>
+            <label for="genre_1">Select Main Genre</label>
+            <select name="genre_1" id="genre_1">
+                <option value="Action">Action</option>
+                <option value="Adventure">Adventure</option>
+                <option value="Animation">Animation</option>
+                <option value="Comdey">Comedy</option>
+                <option value="Crime">Crime</option>
+                <option value="Drama">Drama</option>
+                <option value="Family">Family</option>
+                <option value="Fantasy">Fantasy</option>
+                <option value="Historic">Historic</option>
+                <option value="Music">Music</option>
+                <option value="Mystery">Mystery</option>
+                <option value="Romance">Romance</option>
+                <option value="Sci-Fi">Sci-Fi</option>
+                <option value="Thriller">Thriller</option>
+                <option value="War">War</option>
+            </select>
+            <br>
+            <label for="genre_2">Select Sub Genre 2</label>
+            <select name="genre_2" id="genre_2">
+                <option value="Action">Action</option>
+                <option value="Adventure">Adventure</option>
+                <option value="Animation">Animation</option>
+                <option value="Comdey">Comedy</option>
+                <option value="Crime">Crime</option>
+                <option value="Drama">Drama</option>
+                <option value="Family">Family</option>
+                <option value="Fantasy">Fantasy</option>
+                <option value="Historic">Historic</option>
+                <option value="Music">Music</option>
+                <option value="Mystery">Mystery</option>
+                <option value="Romance">Romance</option>
+                <option value="Sci-Fi">Sci-Fi</option>
+                <option value="Thriller">Thriller</option>
+                <option value="War">War</option>
+            </select>
+            <br>
+            <label for="genre_3">Select Sub Genre 3</label>
+            <select name="genre_3" id="genre_3">
+                <option value="Action">Action</option>
+                <option value="Adventure">Adventure</option>
+                <option value="Animation">Animation</option>
+                <option value="Comdey">Comedy</option>
+                <option value="Crime">Crime</option>
+                <option value="Drama">Drama</option>
+                <option value="Family">Family</option>
+                <option value="Fantasy">Fantasy</option>
+                <option value="Historic">Historic</option>
+                <option value="Music">Music</option>
+                <option value="Mystery">Mystery</option>
+                <option value="Romance">Romance</option>
+                <option value="Sci-Fi">Sci-Fi</option>
+                <option value="Thriller">Thriller</option>
+                <option value="War">War</option>
+            </select>
+            <br>
+
+            <label for="rating">Select Rating</label>
+            <select name="rating" id="rating">
+                <option value="G">G</option>
+                <option value="PG">PG</option>
+                <option value="PG-13">PG-13</option>
+                <option value="R">R</option>
+            </select>
+            <br>
+            <label for="studio">Select Studio</label>
+            <select name="studio" id="studio">
+                <option value='20th Century Fox'>20th Century Fox</option>
+                <option value='American International Pictures'>American International Pictures</option>
+                <option value='Associated Film Distribution'>Associated Film Distribution</option>
+                <option value='Buena Vista Pictures Distribution'>Buena Vista Pictures Distribution</option>
+                <option value='Columbia'>Columbia</option>
+                <option value='DreamWorks'>DreamWorks</option>
+                <option value='Embassy Pictures'>Embassy Pictures</option>
+                <option value='Fox'>Fox</option>
+                <option value='Hollywood Pictures'>Hollywood Pictures</option>
+                <option value='IFC Films'>IFC Films</option>
+                <option value='Lionsgate'>Lionsgate</option>
+                <option value='Marvel'>Marvel</option>
+                <option value='MGM'>MGM</option>
+                <option value='National Air and Space Museum'>National Air and Space Museum</option>
+                <option value='New Line'>New Line</option>
+                <option value='Orion Pictures'>Orion Pictures</option>
+                <option value='Paramount'>Paramount</option>
+                <option value='Summit'>Summit</option>
+                <option value='Sunn Classic Pictures'>Sunn Classic Pictures</option>
+                <option value='Touchstone'>Touchstone</option>
+                <option value='TriStar Pictures'>TriStar Pictures</option>
+                <option value='United Artists'>United Artists</option>
+                <option value='United Film Distribution Company'> United Film Distribution Company</option>
+                <option value='Universal'>Universal</option>
+                <option value='Walt Disney Pictures'>Walt Disney Pictures</option>
+                <option value='Warner Bros.'>Warner Bros.</option>
+            </select>
+            <br>
+            <input type="submit">
+
+        </form>
+    </div>
+
+
+</body>
+
+</html>
