@@ -6,8 +6,7 @@ import chart_studio
 
 
 app = flask.Flask(__name__)
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-app.secret_key = b"I am a secret key!"
+
 
 username = "rpowers621"
 api_key = "mhJ0j9j2U7IdVkCzmpVp"
