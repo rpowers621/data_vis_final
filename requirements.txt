@@ -2,5 +2,5 @@ kaleido
 Flask
 pandas 
 plotly_express
-chart_studio.plotly 
+plotly 
 chart_studio
