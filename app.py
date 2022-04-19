@@ -1,4 +1,5 @@
 import pandas as pd
+import os
 import plotly_express as px
 import flask
 import chart_studio.plotly as py
@@ -180,9 +181,6 @@ def movie_info():
         "createblock.html",
         start=start,
         end=end,
-        # g1=int((per_g1 * (0.7)) * 10),
-        # g2=int((per_g2 * (0.2)) * 10),
-        # g3=int((per_g3 * (0.1)) * 10),
         g1=per_g1,
         g2=per_g2,
         g3=per_g3,
@@ -192,4 +190,6 @@ def movie_info():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(
+        host=os.getenv("IP", "0.0.0.0"), port=int(os.getenv("PORT", 8080)), debug=True
+    )
