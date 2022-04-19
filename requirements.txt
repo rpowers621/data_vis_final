@@ -1,0 +1,6 @@
+kaleido
+Flask
+pandas 
+plotly_express
+chart_studio.plotly 
+chart_studio
