@@ -11,6 +11,7 @@
     <div class="percents">
         {% if start %}
         <p>{{start}} - {{end}}</p>
+        <a href="/dashapp/"> Click to see the Blockbuster Dashboard</a>
         <table>
 
             <tr>
@@ -28,8 +29,13 @@
                 <td>Studio</td>
             </tr>
         </table>
-
-        <p>If you have all percentages 50% and above, then you just created a blockbuster!</p>
+        {%if title%}
+        <h3>Looks like your movie would be a hit! Check out a similar movie that crushed the box office.</h3>
+        <img src={{img}} alt="">
+        <h2>{{title}}</h2>
+        {% else%}
+        <h3>Not blockbuster material. Try again!</h3>
+        {% endif %}
         {% endif %}
     </div>
 

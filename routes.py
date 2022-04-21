@@ -1,12 +1,11 @@
-import pandas as pd
 import os
+import pandas as pd
 import plotly_express as px
 import flask
 import chart_studio.plotly as py
 import chart_studio
-
-
-app = flask.Flask(__name__)
+import random
+from flask import current_app as app
 
 
 username = "rpowers621"
@@ -44,7 +43,6 @@ def make_rating_graph(data):
 def make_studio_graph(data):
     studio = data.groupby("studio").size().reset_index(name="count")
     fig = px.bar(studio, x="count", y="studio")
-    fig.write_image("static/studio.jpeg")
     py.plot(fig, filename="Top Movie By Studio", auto_open=False)
 
     count_max = studio["count"].max()
@@ -125,27 +123,38 @@ def create_block():
 
 def make_personal_stats(data, column, selection):
     df2 = data.groupby(column).size().reset_index(name="count")
-    # fig = px.line(ratings, x="rating", y="count")
-    # py.plot(fig, filename="Top Movie By Rating", auto_open=False)
+    fig = px.pie(df2, values="count", names=column)
+    fig.update_traces(textposition="inside", textinfo="percent+label")
+    fig.write_image(f"static/{column}.jpeg")
+    py.plot(fig, filename=f"Top Movie By {column}", auto_open=False)
 
     count_sum = df2["count"].sum()
 
     if selection in set(df2[column]):
-
         df3 = df2[df2[column] == selection].astype("string")
-
         count = df3["count"].astype("int").tolist()
-        print(count_sum)
-        print(count[0])
-        print(df2.count()[0])
-        items = df2.count()[0]
         return int((count[0] / count_sum) * 100)
     else:
         return 0
 
 
+def get_similar(dataframe, genre, studio):
+    df = dataframe[dataframe["studio"] == studio]
+    df2 = df[df["Genre_1"] == genre]
+    print(df2["title"])
+    titles = df2["title"].astype("string").tolist()
+    imgs = df2["poster_url"].astype("string").tolist()
+    title, img = None, None
+    if titles:
+        title = random.choice(titles)
+    if imgs:
+        img = random.choice(imgs)
+    return title, img
+
+
 @app.route("/movie_info", methods=["POST"])
 def movie_info():
+
     decade = flask.request.form.get("decade")
     if decade:
         if decade == "75-84":
@@ -163,19 +172,20 @@ def movie_info():
         df = get_decade(start, end)
         g1 = flask.request.form.get("genre_1")  # 70%
         per_g1 = make_personal_stats(df, "Genre_1", g1)
-        print(per_g1)
+
         g2 = flask.request.form.get("genre_2")  # 20%
         per_g2 = make_personal_stats(df, "Genre_2", g2)
-        print(per_g2)
+
         g3 = flask.request.form.get("genre_3")  # 10%
         per_g3 = make_personal_stats(df, "Genre_3", g3)
-        print(per_g3)
+
         rating = flask.request.form.get("rating")
         per_rating = make_personal_stats(df, "rating", rating)
-        print(per_rating)
+
         studio = flask.request.form.get("studio")
         per_studio = make_personal_stats(df, "studio", studio)
-        print(per_studio)
+
+        title, img = get_similar(df, g1, studio)
 
     return flask.render_template(
         "createblock.html",
@@ -186,10 +196,6 @@ def movie_info():
         g3=per_g3,
         rating=per_rating,
         studio=per_studio,
-    )
-
-
-if __name__ == "__main__":
-    app.run(
-        host=os.getenv("IP", "0.0.0.0"), port=int(os.getenv("PORT", 8080)), debug=True
+        title=title,
+        img=img,
     )

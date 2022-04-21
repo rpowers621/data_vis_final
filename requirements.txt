@@ -4,3 +4,5 @@ pandas
 plotly_express
 plotly 
 chart_studio
+jupyter-dash
+dash
