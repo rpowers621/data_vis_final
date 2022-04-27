@@ -56,10 +56,7 @@ def get_genre_stats(d_df):
     most_popular = []
     index = 1
     for i in genre_list:
-        genres = (
-            d_df.groupby(i).size().reset_index(name="count")
-        )  # use this data for a graph
-
+        genres = d_df.groupby(i).size().reset_index(name="count")
         make_genre_graph(i, genres, index)
         count_max = genres["count"].max()
         genre = genres[genres["count"] == count_max].astype("string")
@@ -123,10 +120,19 @@ def create_block():
 
 def make_personal_stats(data, column, selection):
     df2 = data.groupby(column).size().reset_index(name="count")
-    fig = px.pie(df2, values="count", names=column)
-    fig.update_traces(textposition="inside", textinfo="percent+label")
+    fig = px.scatter(df2, x=column, y="count")
+    fig.update_traces(
+        mode="markers",
+        marker=dict(
+            size=10,
+            # I want the color to be green if
+            # lower_limit ≤ y ≤ upper_limit
+            # else red
+            color=(df2[column] == selection).astype("int"),
+            colorscale=[[0, "blue"], [1, "red"]],
+        ),
+    )
     fig.write_image(f"static/{column}.jpeg")
-    py.plot(fig, filename=f"Top Movie By {column}", auto_open=False)
 
     count_sum = df2["count"].sum()
 
@@ -141,14 +147,11 @@ def make_personal_stats(data, column, selection):
 def get_similar(dataframe, genre, studio):
     df = dataframe[dataframe["studio"] == studio]
     df2 = df[df["Genre_1"] == genre]
-    print(df2["title"])
-    titles = df2["title"].astype("string").tolist()
     imgs = df2["poster_url"].astype("string").tolist()
     title, img = None, None
-    if titles:
-        title = random.choice(titles)
     if imgs:
         img = random.choice(imgs)
+        title = "yes"
     return title, img
 
 
@@ -198,4 +201,9 @@ def movie_info():
         studio=per_studio,
         title=title,
         img=img,
+        rating_img="/static/rating.jpeg",
+        g1_img="/static/Genre_1.jpeg",
+        g2_img="/static/Genre_2.jpeg",
+        g3_img="/static/Genre_3.jpeg",
+        st_img="/static/studio.jpeg",
     )

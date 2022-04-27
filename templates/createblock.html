@@ -13,26 +13,30 @@
         <p>{{start}} - {{end}}</p>
         <a href="/dashapp/"> Click to see the Blockbuster Dashboard</a>
         <table>
-
             <tr>
-                <td>{{g1}}%</td>
-                <td>{{g2}}%</td>
-                <td>{{g3}}%</td>
-                <td>{{rating}}%</td>
-                <td>{{studio}}%</td>
+                <td> <img src={{g1_img}} width=400 height=400></td>
+                <td> <img src={{g2_img}} width=400 height=400></td>
+                <td> <img src={{g3_img}} width=400 height=400></td>
+
             </tr>
             <tr>
                 <td>Genre 1</td>
                 <td>Genre 2</td>
                 <td>Genre 3</td>
+
+            </tr>
+            <tr>
+                <td> <img src={{rating_img}} width=400 height=400></td>
+                <td> <img src={{st_img}} width=400 height=400></td>
+            </tr>
+            <tr>
                 <td>Rating</td>
                 <td>Studio</td>
             </tr>
         </table>
         {%if title%}
         <h3>Looks like your movie would be a hit! Check out a similar movie that crushed the box office.</h3>
-        <img src={{img}} alt="">
-        <h2>{{title}}</h2>
+        <img src={{img}} width=400 height=600>
         {% else%}
         <h3>Not blockbuster material. Try again!</h3>
         {% endif %}
